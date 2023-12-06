@@ -1,0 +1,34 @@
+I decided to participate in December Adventure this year.
+
+This is the first time I'd heard of <a href="https://eli.li/december-adventure">December Adventure</a>, and I like the idea a lot more than the <em>Advent of Code</em> &mdash; it just meshes better with how my brain works.
+
+So, today, I started by setting up a system to make it <em>as easy as possible</em> to document my progress.
+
+I decided to create a static microblog website, inspired by <a href="https://micronews.debian.org/">Debian Micronews</a>.
+
+The way it works is:
+
+- <code>templates/</code> has a collection of templates,
+- <code>posts/</code> has a collection of posts,
+- <code>build.py</code> takes all of that, slams them together to create <em>_site/index.html</em> and <em>_site/atom.xml</em>
+
+
+Posts freeform HTML, with no need for using &lt;br&gt; or &lt;p&gt; or anything like that.
+You can see <a href="https://github.com/duckinator/news.do1g.com/blob/main/posts/2023-12-06_01.38.17.html">the original source for this post</a> and then view the source of this page to prove it!
+
+Basically, CSS is magic. Specifically <code>white-space: break-spaces;</code>. :3
+
+I then made a bookmarklet which gets the current date and time, then opens GitHub's "new file" page with the filename filled out already.
+
+My problem with blogging is if I have to switch to a different repo, pull out a text editor, etc... it starts feeling like an Endeavour&trade;.
+
+And if it becomes an Endeavour&trade;, I start putting a lot of effort into it &mdash; which promptly backfires, because I don't have the motivation to drive it to completion.
+
+Because I want to <em>work on the thing</em>, not <em>write about the thing</em>.
+
+So I made it as ADHD-friendly as I could, in hopes of mitigating this.
+
+
+I BANGED OUT THIS POST IN 10 MINUTES.
+
+I just went to Firefox, hit Ctrl-T, clicked a bookmarklet, and started typing. WAY lower friction.
