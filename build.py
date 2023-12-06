@@ -4,6 +4,7 @@ from datetime import datetime
 from pathlib import Path
 
 ROOT_URL = "https://news.do1g.com"
+SITE_NAME = "pupdates"
 
 HTML = Path("templates/main.html").read_text()
 POST = Path("templates/post.html").read_text()
@@ -71,6 +72,7 @@ def parse_datetime(dt):
 
 variables = {
     "root_url": ROOT_URL,
+    "site_name": SITE_NAME,
     "join-lines": lambda l: "\n".join(l),
     "friendly-datetime": lambda dt: parse_datetime(dt).strftime("%b %d, %Y %I:%M%p"),
     "postify-each": lambda l: [Template(POST).apply({**post, **variables}) for post in l],
