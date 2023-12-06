@@ -3,6 +3,8 @@
 from datetime import datetime
 from pathlib import Path
 
+ROOT_URL = "https://news.do1g.com"
+
 HTML = Path("templates/main.html").read_text()
 POST = Path("templates/post.html").read_text()
 
@@ -67,14 +69,15 @@ class Template:
 def parse_datetime(dt):
     return datetime.strptime(dt, "%Y-%m-%d %H:%M:%S")
 
-functions = {
+variables = {
+    "root_url": ROOT_URL,
     "join-lines": lambda l: "\n".join(l),
     "friendly-datetime": lambda dt: parse_datetime(dt).strftime("%b %d, %Y %I:%M%p"),
-    "postify-each": lambda l: [Template(POST).apply({**post, **functions}) for post in l],
+    "postify-each": lambda l: [Template(POST).apply({**post, **variables}) for post in l],
     "datetime-to-slug": lambda dt: parse_datetime(dt).strftime("%Y-%m-%d-%I:%M%p"),
     "atom-tag": lambda dt: parse_datetime(dt).strftime("tag:duckinator.net,%Y-%m-%d:%H%M"),
     "atom-datetime": lambda dt: parse_datetime(dt).strftime("%Y-%m-%dT%H:%M:%SZ"),
-    "atomize-each":  lambda l: [Template(ATOM_POST).apply({**post, **functions}) for post in l],
+    "atomize-each":  lambda l: [Template(ATOM_POST).apply({**post, **variables}) for post in l],
     "dict-get-dt": lambda d: d["datetime"],
     "first": lambda l: l[0],
     "last": lambda l: l[-1],
@@ -87,7 +90,7 @@ posts = sorted(posts, key=lambda x: x["datetime"], reverse=True)
 site = Path("_site")
 site.mkdir(exist_ok=True)
 
-html = Template(HTML).apply({"posts": posts, **functions})
+html = Template(HTML).apply({"posts": posts, **variables})
 (site / "index.html").write_text(html)
-atom = Template(ATOM).apply({"posts": posts, **functions})
+atom = Template(ATOM).apply({"posts": posts, **variables})
 (site / "atom.xml").write_text(atom)
