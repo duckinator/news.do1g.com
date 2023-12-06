@@ -1,0 +1,1 @@
+I should rename the files that are generated to be <code>*.html</code> so the preview thing on GitHub's web editor works right.
