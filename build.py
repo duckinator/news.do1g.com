@@ -78,6 +78,7 @@ functions = {
     "dict-get-dt": lambda d: d["datetime"],
     "first": lambda l: l[0],
     "last": lambda l: l[-1],
+    "lines": lambda s: s.split("\n"),
 }
 
 posts = [{"datetime": p.stem.replace(".", ":").replace("_", " "), "text": p.read_text()} for p in Path("posts").glob("*.txt")]
