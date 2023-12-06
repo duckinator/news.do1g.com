@@ -91,14 +91,15 @@ class Template:
         return "".join([self.apply_part(part, variables) for part in parts])
 
 
-posts = [
-    {"date": "2023-12-05-195712", "text": "foo"},
-    {"date": "2023-12-05-195800", "text": "bar"},
-]
+posts = [{"date": p.name.stem, "text": p.read_text()} for p in Path("posts").glob("*.md")]
 
 results = Template(PAGE).apply({
     "posts": posts,
     "postify-each": lambda l: [Template(POST).apply(post) for post in l],
-    "join-lines": lambda l: "\n".join(l)
+    "join-lines": lambda l: "\n".join(l),
 })
-print(results)
+
+site = Path("_site")
+site.mkdir(exist_ok=True)
+
+(site / "index.html").write_text(results)
