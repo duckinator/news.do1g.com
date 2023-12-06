@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+from datetime import datetime
+from pathlib import Path
+
 PAGE = """\
 <!doctype html>
 <meta charset="utf-8">
@@ -33,8 +36,9 @@ a:active, a:focus, a:hover{ color: #2197db; }
 """
 
 POST = """\
-<section data-date="{{ date }}">
-{{ text }}
+<section>
+<p>{{ text }}</p>
+<time datetime="{{ datetime }}">{{ datetime | friendly-datetime }}</time>
 </section>
 """
 
@@ -91,13 +95,14 @@ class Template:
         return "".join([self.apply_part(part, variables) for part in parts])
 
 
-posts = [{"date": p.name.stem, "text": p.read_text()} for p in Path("posts").glob("*.md")]
-
-results = Template(PAGE).apply({
-    "posts": posts,
-    "postify-each": lambda l: [Template(POST).apply(post) for post in l],
+functions = {
     "join-lines": lambda l: "\n".join(l),
-})
+    "friendly-datetime": lambda dt: datetime.strptime(dt, "%Y-%m-%d %H:%M:%S").strftime("%b %d, %Y %I:%M%p"),
+    "postify-each": lambda l: [Template(POST).apply(post | functions) for post in l],
+}
+
+posts = [{"datetime": p.stem.replace(".", ":").replace("_", " "), "text": p.read_text()} for p in Path("posts").glob("*.txt")]
+results = Template(PAGE).apply({"posts": posts} | functions)
 
 site = Path("_site")
 site.mkdir(exist_ok=True)
