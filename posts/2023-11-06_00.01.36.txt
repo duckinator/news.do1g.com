@@ -1,0 +1,7 @@
+I now have a bookmarklet titled "New Post" that I can click, which takes me to a page where I can write a post!
+
+And once I'm on that page, clicking "Commit changes" is enough for it to get committed and published.
+
+I actually like this a lot.
+
+I might actually blog now because this is hella informal and much more friendly to my ADHD than longform stuff?
