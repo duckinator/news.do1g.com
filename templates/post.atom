@@ -1,0 +1,7 @@
+    <entry>
+        <title>{{ text }}</title>
+        <link href="https://news.do1g.com/#{{ datetime | datetime-to-slug }}" />
+        <id>{{ datetime | atom-tag }}</id>
+        <updated>{{ datetime | atom-datetime }}</updated>
+        <content>
+    </entry>

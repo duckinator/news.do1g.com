@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>@duckinator updates</title>
+  <link href="http://news.do1g.com/"/>
+  <updated>{{ posts | first | dict-get-dt | atom-datetime }}</updated>
+  <author>
+    <name>Ellen Marie Dash</name>
+  </author>
+  <id>https://news.do1g.com/</id>
+
+  {{ posts | atomize-each | join-lines }}
+</feed>

@@ -3,78 +3,11 @@
 from datetime import datetime
 from pathlib import Path
 
-HTML = """\
-<!doctype html>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* { background: #fafaff; }
-main {
-    font-family: helvetica, sans-serif;
-    font-size: 1.3rem;
-    max-width: 60ch;
-    margin: 0 auto;
-}
-section {
-    border: 1px solid #000;
-    border-radius: 0.25em;
-}
-h1 { font-size: 2rem; }
-p, time { margin: 1em; }
-time {
-    font-size: 0.8em;
-    display: block;
-    text-align: right;
-}
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-a, a:visited { color: #166491; }
-a:active, a:focus, a:hover{ color: #2197db; }
-</style>
-<main>
-<h1>Recent Updates for @duckinator</h1>
+HTML = Path("templates/main.html").read_text()
+POST = Path("templates/post.html").read_text()
 
-{{ posts | postify-each | join-lines }}
-</main>
-"""
-
-POST = """\
-<section id="{{ datetime | datetime-to-slug }}">
-<p>{{ text }}</p>
-<a href="#{{ datetime | datetime-to-slug }}">
-    <time datetime="{{ datetime }}">{{ datetime | friendly-datetime }}</time>
-</a>
-</section>
-"""
-
-ATOM = """\
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <title>@duckinator updates</title>
-  <link href="http://news.do1g.com/"/>
-  <updated>{{ posts | first | dict-get-dt | atom-datetime }}</updated>
-  <author>
-    <name>Ellen Marie Dash</name>
-  </author>
-  <id>https://news.do1g.com/</id>
-
-  {{ posts | atomize-each | join-lines }}
-</feed>
-"""
-
-ATOM_POST = """\
-
-    <entry>
-        <title>{{ text }}</title>
-        <link href="https://news.do1g.com/#{{ datetime | datetime-to-slug }}" />
-        <id>{{ datetime | atom-tag }}</id>
-        <updated>{{ datetime | atom-datetime }}</updated>
-        <content>
-    </entry>
-"""
+ATOM = Path("templates/main.atom").read_text()
+ATOM_POST = Path("templates/post.atom").read_text()
 
 
 class Template:

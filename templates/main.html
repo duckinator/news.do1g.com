@@ -1,0 +1,35 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* { background: #fafaff; }
+main {
+    font-family: helvetica, sans-serif;
+    font-size: 1.3rem;
+    max-width: 60ch;
+    margin: 0 auto;
+}
+section {
+    border: 1px solid #000;
+    border-radius: 0.25em;
+}
+h1 { font-size: 2rem; }
+p, time { margin: 1em; }
+time {
+    font-size: 0.8em;
+    display: block;
+    text-align: right;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+a, a:visited { color: #166491; }
+a:active, a:focus, a:hover{ color: #2197db; }
+</style>
+<main>
+<h1>Recent Updates for @duckinator</h1>
+
+{{ posts | postify-each | join-lines }}
+</main>

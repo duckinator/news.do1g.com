@@ -1,0 +1,6 @@
+<section id="{{ datetime | datetime-to-slug }}">
+<p>{{ text }}</p>
+<a href="#{{ datetime | datetime-to-slug }}">
+    <time datetime="{{ datetime }}">{{ datetime | friendly-datetime }}</time>
+</a>
+</section>
