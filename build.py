@@ -95,14 +95,16 @@ class Template:
         return "".join([self.apply_part(part, variables) for part in parts])
 
 
+# FIXME: Once Netlify supports Py3.9+, change {**a, **b} and similar to a | b.
+
 functions = {
     "join-lines": lambda l: "\n".join(l),
     "friendly-datetime": lambda dt: datetime.strptime(dt, "%Y-%m-%d %H:%M:%S").strftime("%b %d, %Y %I:%M%p"),
-    "postify-each": lambda l: [Template(POST).apply(post | functions) for post in l],
+    "postify-each": lambda l: [Template(POST).apply({**post, **functions}) for post in l],
 }
 
 posts = [{"datetime": p.stem.replace(".", ":").replace("_", " "), "text": p.read_text()} for p in Path("posts").glob("*.txt")]
-results = Template(PAGE).apply({"posts": posts} | functions)
+results = Template(PAGE).apply({"posts": posts, **functions})
 
 site = Path("_site")
 site.mkdir(exist_ok=True)
