@@ -21,5 +21,5 @@ Posts have a filename of the form `posts/YYYY-MM-DD_HH.MM.SS.txt` where:
 If you want to make posts, make a bookmarklet with the following as the URL:
 
 ```
-javascript:(function(){date=new Date();y=date.getFullYear();mo=date.getMonth();d=date.getDate();h=date.getHours();mi=date.getMinutes();s=date.getSeconds();location.href='https://github.com/duckinator/news.do1g.com/new/main?filename=posts/'+y+'-'+mo.padStart(2, '0')+'-'+d.padStart(2, '0')+'_'+h.padStart(2, '0')+'.'+mi.padStart(2, '0')+'.'+s.padStart(2, '0')+'.txt';})()
+javascript:(function(){date=new Date();y=date.getFullYear();mo=date.getMonth();d=date.getDate();h=date.getHours();mi=date.getMinutes();s=date.getSeconds();location.href='https://github.com/duckinator/news.do1g.com/new/main?filename=posts/'+y+'-'+mo.toString().padStart(2, '0')+'-'+d.toString().padStart(2, '0')+'_'+h.toString().padStart(2, '0')+'.'+mi.toString().padStart(2, '0')+'.'+s.toString().padStart(2, '0')+'.txt';})()
 ```
