@@ -83,6 +83,8 @@ variables = {
     "dict-get-dt": lambda d: d["datetime"],
     "first": lambda l: l[0],
     "last": lambda l: l[-1],
+    "head": lambda l: l[0],
+    "tail": lambda l: l[1:-1],
     "lines": lambda s: s.split("\n"),
 }
 
