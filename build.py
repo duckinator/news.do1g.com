@@ -70,9 +70,45 @@ class Template:
 def parse_datetime(dt):
     return datetime.strptime(dt, "%Y-%m-%d %H:%M:%S")
 
+def paragraphs(original_lines):
+    lines = []
+    in_ul = False
+    in_ol = False
+    for line in original_lines:
+        if line.startswith("- "):
+            if not in_ul:
+                lines.append("<ul>")
+                in_ul = True
+            lines.append(f"<li>{line[2:]}</li>")
+            continue
+        elif in_ul:
+            lines.append("</ul>")
+            in_ul = False
+
+        if line.startswith("# "):
+            if not in_ol:
+                lines.append("<ol>")
+                in_ol = True
+            lines.append(f"<li>{line[2:]}</li>")
+            continue
+        elif in_ol:
+            lines.append("</ol>")
+            in_ol = False
+
+        # Beyond this point, we are NOT in a list.
+
+        if line.strip().startswith("<") or len(line.strip()) == 0:
+            lines.append(line)
+        else:
+            lines.append(f"<p>{line}</p>")
+    return lines
+
+
+
 variables = {
     "root_url": ROOT_URL,
     "site_name": SITE_NAME,
+    "paragraphs": paragraphs,
     "join-lines": lambda l: "\n".join(l),
     "friendly-datetime": lambda dt: parse_datetime(dt).strftime("%b %d, %Y %I:%M%p"),
     "postify-each": lambda l: [Template(POST).apply({**post, **variables}) for post in l],

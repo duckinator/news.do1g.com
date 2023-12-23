@@ -1,7 +1,7 @@
 <section id="{{ datetime | datetime-to-slug }}">
-<p><strong>{{ text | lines | head }}</strong></p>
+<h2><strong>{{ text | lines | head }}</strong></h2>
 
-<p>{{ text | lines | tail | join-lines }}</p>
+{{ text | lines | tail | paragraphs | join-lines }}
 <a href="#{{ datetime | datetime-to-slug }}">
     <time datetime="{{ datetime }}">{{ datetime | friendly-datetime }}</time>
 </a>
