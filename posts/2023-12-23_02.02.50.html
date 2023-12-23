@@ -1,0 +1,80 @@
+Designing an AAC Vocabulary, part #1 of who knows how many.
+
+Hi! I've not been using this nearly as much as I was hoping, BUT I'm hoping this big ol' pile of words might make up for it!
+
+I want to thank AssistiveWare, the makers of Proloquo (the AAC app I've used for over a year now), for openly writing about how they designed their vocabulary and even citing their sources(!) for their research.
+
+I'm using what they talk about as a starting point, but to be clear: I have no intention of copying their vocabulary choices and organization verbatim. I'm trying to come up with a system from <a href="https://en.wikipedia.org/wiki/First_principle">first principles</a> &mdash; or as close to that as is reasonable &mdash; for a different target audience.
+
+Before diving in, let's start with a link dump.
+
+AssistiveWare has written about their approach, and these are a starting point for me:
+
+- <a href="https://www.assistiveware.com/blog/how-is-the-vocabulary-in-proloquo-organized">How is the Proloquo vocabulary organized?</a>
+- <a href="https://www.assistiveware.com/blog/how-is-proloquo-efficient">How did we make Proloquo extremely efficient?</a>
+- <a href="https://www.assistiveware.com/learn-aac/consider-communication-functions">Communication Functions: All the reasons we communicate</a>
+- <a href="https://www.assistiveware.com/blog/aac-data-collection-and-privacy">AAC data collection and privacy</a>
+
+References, from those AssistiveWare links:
+
+- <cite>Beck, I., McKeown, M., and Kucan, L. (2002). Bringing words to life. New York, NY: The Guilford Press.</cite>
+- <cite>Biemiller, A. (2009). Words worth teaching: closing the vocabulary gap. Columbus, OH: McGraw-Hill SRA.</cite>
+- <cite>Marzano, R., (2020). Teaching basic, advanced, and academic vocabulary: a comprehensive framework for elementary instruction. Bloomington, IN: Marzano Resources.</cite>
+
+While reading through AssistiveWare's posts (linked above) and thinking about my own experiences with AAC software, I wrote down some key points I want to revisit over the coming weeks.
+
+<h2>Balancing competing needs</h2>
+
+There's no objectively "best" vocabulary/system. You're always balancing competing needs.
+
+Proloquo focuses on language development and providing a system you can grow with.
+
+However, I'm focusing on teens and adults who have developed vocabulary, are somewhat technically proficient, but have difficultiy speaking.
+
+I'm optimizing for a very different group of users, so what I come up with might look wildly different.
+
+In fact, I <em>want</em> it to be different: I'm not trying to make a Proloquo clone, and I'm not trying to make a Proloquo competitor. I'm trying to create an alternative for people who can benefit from AAC but have different needs.
+
+<h2>Motor planning &amp; AAC efficiency</h2>
+
+AAC is inherently slower than speech. This is a fundamental limitation of the concept.
+
+From reading what AssistiveWare has written, as well as my first-hand experience with various AAC apps, there are a few things that make a huge impact on how quickly you can communicate with AAC:
+
+- Make buttons big enough for easy interaction.
+- Put common words on the "home" screen, and have a dedicated button to return to that scren.
+- Have a small number (<10) of designated categories that are easy to switch between. (Proloquo puts this across the top as tabs; my system currently puts them on the left.)
+- Make the most frequently words persistent: Proloquo has 27 other words accessible no matter where you are in the app. 2 of them ("a" and "the") are always immediately available. This is the biggest thing I miss when using other AAC apps.
+- Shallow hierarchy: Avoid ever going more than 2 levels deep.
+- Grammatical inflections: Show "base" words in the main app, and then show grammatical inflections once you select them -- e.g. "I" is common enough to go on the Home screen, but grammatical inflections like "me", "my", "mine", "myself" will be under grammatical inflections.
+- Related words: for "I" this would be things like "I'd", "I'll", "I'm", "I've".
+
+A huge property of an AAC system that affects efficiency is being able know the location of a word ahead of time.
+
+Basically: Unless a word has multiple distinct meanings, only put it in one spot.
+
+If it's used twice and the AAC app uses symbols, give them different symbols. The example AssistiveWare provides is "show": it can be a verb ("can you show me?") or a noun ("they went to a show"). They have two buttons, in different spots, but with different symbols and different meanings.
+
+<h2>Using data for optimization</h2>
+
+AssistiveWare makes a good point in <a href="https://www.assistiveware.com/blog/how-is-proloquo-efficient">How did we make Proloquo extremely efficient?</a> when they talk about using hard data to determine how efficient a system is.
+
+This involves things like collecting lists of real-world words and phrases, and determining how many taps per word are needed for each of them.
+
+If I want this project to be usable even though there were half a dozen <em>other</em> open-source AAC systems I gave up on out of frustration, this kind of work is a hard requirement.
+
+<h2>Stable base, with expansions</h2>
+
+A big part of what made Proloquo work better for me than other systems is it has a fixed base, with areas I can add my own words. I think this is a good balance, because it means anyone who uses Proloquo can pick up any other device with Proloquo on it (even without their customizations) and communicate *most* things, even if they might have to type in a few words by hand.
+
+It's certainly a lot better than typing everything by hand, or being utterly lost because there's so little similarity with the system you were using.
+
+<h2>Data collection</h2>
+
+There are MANY things to say about data collection, but I think AssistiveWare's article on <a href="https://www.assistiveware.com/blog/aac-data-collection-and-privacy">AAC data collection and privacy</a> explains it well.
+
+<h2>Hardware</h2>
+
+The hardest part of this so far, frankly, has been finding an affordable tablet that can run Linux. If the only devices that can use it cost $400, I might as well just port it to iOS or Android. But if I can get it below $200 and not require a subscription, well, maybe it'll be usable for people less fortunate than I am.
+
+I was given an iPad as a gift explicitly so I could use an AAC app that didn't frustrate me relentlessly. There's been times I went multiple days without speaking, and the ones before I had access to a usable AAC system were far more miserable.
