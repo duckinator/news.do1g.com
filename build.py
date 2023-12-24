@@ -124,11 +124,17 @@ variables = {
     "lines": lambda s: s.split("\n"),
 }
 
-posts = [{"datetime": p.stem.replace(".", ":").replace("_", " "), "text": p.read_text()} for p in Path("posts").glob("*.html")]
+posts = [{"filename": p.stem, "datetime": p.stem.replace(".", ":").replace("_", " "), "text": p.read_text()} for p in Path("posts").glob("*.html")]
 posts = sorted(posts, key=lambda x: x["datetime"], reverse=True)
 
 site = Path("_site")
 site.mkdir(exist_ok=True)
+
+for post in posts:
+    html = Template(HTML).apply({"posts": [post], **variables})
+    folder = site / post["filename"]
+    folder.mkdir(exist_ok=True)
+    (folder / "index.html").write_text(html)
 
 html = Template(HTML).apply({"posts": posts, **variables})
 (site / "index.html").write_text(html)
