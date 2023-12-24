@@ -3,5 +3,9 @@
         <link href="https://news.do1g.com/#{{ datetime | datetime-to-slug }}" />
         <id>{{ datetime | atom-tag }}</id>
         <updated>{{ datetime | atom-datetime }}</updated>
-        <content type="html"><![CDATA[{{ text }}]]></content>
+        <content type="html"><![CDATA[
+<h2><strong>{{ text | lines | head }}</strong></h2>
+
+{{ text | lines | tail | paragraphs | join-lines }}
+        ]]></content>
     </entry>
