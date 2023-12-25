@@ -25,6 +25,7 @@ h1, h2, h3, h4 {
 section p { white-space: break-spaces; }
 section { margin: 0 0 8rem 0; }
 p, time { margin: 1rem; }
+div.intro { margin: 2rem 0; }
 time {
     font-size: 0.8em;
     display: block;
@@ -36,6 +37,11 @@ a:active, a:focus, a:hover{ color: #2197db; }
 <main>
 <h1>{{ site_name }}</h1>
 <p><a href="https://notes.do1g.com/">Home</a> &middot; <a href="https://weirder.earth/@puppy">Mastodon</a> &middot; <a href="/atom.xml">Atom Feed</a></p>
+
+<div class="intro">
+<p>I'm <a href="https://smallest.dog">Ellen Dash</a>, but you can call me <em>puppy</em>.</p>
+<p>This is my attempt at <a href="https://notes.andymatuschak.org/About_these_notes?stackedNotes=zCMhncA1iSE74MKKYQS5PBZ">working with the garage door up</a>.</p>
+</div>
 
 {{ posts | postify-each | join-lines }}
 </main>
