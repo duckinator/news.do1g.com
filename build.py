@@ -97,7 +97,7 @@ def paragraphs(original_lines):
 
         # Beyond this point, we are NOT in a list.
 
-        if line.strip().startswith("<") or len(line.strip()) == 0:
+        if line.strip().startswith("<h") or len(line.strip()) == 0:
             lines.append(line)
         else:
             lines.append(f"<p>{line}</p>")
