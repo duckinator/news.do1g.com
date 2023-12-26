@@ -10,7 +10,7 @@ Here's the setup I'm using, on both a <em>Dell Venue 11 Pro</em> (tablet with at
 
 I installed the base Debian 12 image, with sshd enabled (so I could manage them remotely for initial setup), then run these two commands as root:
 
-# <code>apt install tmux htop plasma-mobile plasma-mobile-tweaks</code>
+# <code>apt install tmux htop plasma-mobile plasma-mobile-tweaks qtvirtualkeyboard-plugin</code>
 # <code>printf "\n[General]\nInputMethod=qtvirtualkeyboard\n" &gt;&gt; /etc/sddm.conf</code>
 
 Then, add a user account for yourself (<code>adduser YOURUSERNAME</code> should do the trick), switch to that account, and run:
