@@ -24,7 +24,7 @@ h1, h2, h3, h4 {
 }
 section p { white-space: break-spaces; }
 section { margin: 0 0 8rem 0; }
-p, time { margin: 1rem; }
+p, time, code.block { margin: 1rem; }
 div.intro { margin: 2rem 0; }
 time {
     font-size: 0.8em;
@@ -33,6 +33,14 @@ time {
 }
 a, a:visited { color: #166491; }
 a:active, a:focus, a:hover{ color: #2197db; }
+code {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 0.25rem;
+}
+code.block {
+    display: block;
+    overflow: auto;
+}
 </style>
 <main>
 <h1>{{ site_name }}</h1>

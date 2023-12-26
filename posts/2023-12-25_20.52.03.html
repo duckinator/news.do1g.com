@@ -12,14 +12,12 @@ First, install the base Debian 12 image. (Be sure to install and enable the sshd
 
 Then, run this command:
 
-<code>apt install plasma-mobile plasma-mobile-tweaks qtvirtualkeyboard-plugin</code>
+` apt install plasma-mobile plasma-mobile-tweaks qtvirtualkeyboard-plugin
 
 Then, create a file at <code>/etc/sddm.conf</code> containing the following:
 
-<code>[General]</code>
-<code>InputMethod=qtvirtualkeyboard</code>
-
-(TODO: Make this site handle multi-line code snippets better.)
+` [General]
+` InputMethod=qtvirtualkeyboard
 
 Then, add a user account for yourself by running <code>adduser $YOURUSERNAME</code>.
 
@@ -37,5 +35,5 @@ Here's what I've determined so far:
 
 Every time, <code>dmesg</code> outputs two lines that look like this:
 
-<code>[ 1424.914725] kscreenlocker_g[2396]: segfault at 218 ip 00007fd938b46f9c sp 00007ffc4f1c0e70 error 4 in libQt5Feedback.so.5.0.0[7fd938b46000+4000] likely on CPU 0 (core 0, socket 0)</code>
-<code>[ 1424.914744] Code: 8d 15 58 fa ff ff 89 f5 53 48 89 fb 48 83 ec 08 48 8b 07 48 8b 40 60 48 39 d0 75 4a e8 5d 08 00 00 48 89 de 48 89 c7 48 8b 00 &lt;ff&gt; 50 48 39 e8 75 0d 48 83 c4 08 5b 5d c3 66 0f 1f 44 00 00 e8 3b</code>
+` [ 1424.914725] kscreenlocker_g[2396]: segfault at 218 ip 00007fd938b46f9c sp 00007ffc4f1c0e70 error 4 in libQt5Feedback.so.5.0.0[7fd938b46000+4000] likely on CPU 0 (core 0, socket 0)
+` [ 1424.914744] Code: 8d 15 58 fa ff ff 89 f5 53 48 89 fb 48 83 ec 08 48 8b 07 48 8b 40 60 48 39 d0 75 4a e8 5d 08 00 00 48 89 de 48 89 c7 48 8b 00 &lt;ff&gt; 50 48 39 e8 75 0d 48 83 c4 08 5b 5d c3 66 0f 1f 44 00 00 e8 3b

@@ -74,6 +74,7 @@ def paragraphs(original_lines):
     lines = []
     in_ul = False
     in_ol = False
+    in_code = False
     for line in original_lines:
         if line.startswith("- "):
             if not in_ul:
@@ -95,12 +96,32 @@ def paragraphs(original_lines):
             lines.append("</ol>")
             in_ol = False
 
+        if line.startswith("` "):
+            if not in_code:
+                lines.append(f"<pre><code class=\"block\">{line[2:]}")
+                in_code = True
+            else:
+                lines.append(line[2:])
+            continue
+        elif in_code:
+            lines.append("</code></pre>")
+            in_code = False
+            continue
+
         # Beyond this point, we are NOT in a list.
 
         if line.strip().startswith("<h") or len(line.strip()) == 0:
             lines.append(line)
         else:
             lines.append(f"<p>{line}</p>")
+
+    if in_ol:
+        lines.append("</ol>")
+    if in_ul:
+        lines.append("</ul>")
+    if in_code:
+        lines.append("</code></pre>")
+
     return lines
 
 
