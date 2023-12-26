@@ -8,31 +8,34 @@ Here's the setup I'm using, on both a <em>Dell Venue 11 Pro</em> (tablet with at
 - KDE + Plasma Mobile shell
 - SDDM (display manager) with virtual keyboard enabled
 
-I installed the base Debian 12 image, with sshd enabled (so I could manage them remotely for initial setup), then run these two commands as root:
+First, install the base Debian 12 image. (Be sure to install and enable the sshd if you need it!)
 
-# <code>apt install tmux htop plasma-mobile plasma-mobile-tweaks qtvirtualkeyboard-plugin</code>
-# <code>printf "\n[General]\nInputMethod=qtvirtualkeyboard\n" &gt;&gt; /etc/sddm.conf</code>
+Then, run this command:
 
-Then, add a user account for yourself (<code>adduser YOURUSERNAME</code> should do the trick), switch to that account, and run:
+<code>apt install plasma-mobile plasma-mobile-tweaks qtvirtualkeyboard-plugin</code>
 
-<code>printf "#!/usr/bin/env bash\n\nloginctl unlock-session $1\n" &gt; ~/unlock.sh &amp;&amp; chmod +x ~/unlock.sh</code>
+Then, create a file at <code>/etc/sddm.conf</code> containing the following:
 
-This new <code>~/unlock.sh</code> script is to work around a problem with the screen locker. I'm hoping to figure out how to properly resolve that problem.
+<code>[General]</code>
+<code>InputMethod=qtvirtualkeyboard</code>
+
+(TODO: Make this site handle multi-line code snippets better.)
+
+Then, add a user account for yourself by running <code>adduser $YOURUSERNAME</code>.
 
 <h3>The kscreenlocker problem</h3>
 
-On both devices, if the system is idle for long enough to go into standby, it <em>nearly always</em> will give me a screen that states &ldquo;The screen locker is broken and unlocking is not possible anymore&rdquo; and suggests using <code>loginctl unlock-session $SESSION_NUMBER</code> to unlock it.
+On both devices, if the system is idle for long enough to go into standby, it <em>nearly always</em> will crash.
+When it crashes, it shows a screen stating &ldquo;The screen locker is broken and unlocking is not possible anymore.&rdquo;
 
-The <code>~/unlock.sh</code> script I mentioned above is a workaround for this. I'm trying to narrow down the cause, and hopefully fix it.
+Fortunately, it gives you instructions on how to force-unlock it anyway, but it requires a keyboard, so that's pretty annoying on a tablet.
 
 Here's what I've determined so far:
-- If the screen is idle for long enough to lock the screen and then turn off the screen, the screen locker crashes.
+- If the screen is idle for long enough to lock the screen and then turn off the screen, the screen locker <em>always</em> crashes when I try to unlock it.
 - If I lock and unlock the screen quickly, it seems fine.
-- If I lock the screen, wait 5 seconds, then unlcok it... it crashes.
+- If I lock the screen, wait 5 seconds, then unlock it... it crashes.
 
 Every time, <code>dmesg</code> outputs two lines that look like this:
 
-<pre>
-[ 1424.914725] kscreenlocker_g[2396]: segfault at 218 ip 00007fd938b46f9c sp 00007ffc4f1c0e70 error 4 in libQt5Feedback.so.5.0.0[7fd938b46000+4000] likely on CPU 0 (core 0, socket 0)
-[ 1424.914744] Code: 8d 15 58 fa ff ff 89 f5 53 48 89 fb 48 83 ec 08 48 8b 07 48 8b 40 60 48 39 d0 75 4a e8 5d 08 00 00 48 89 de 48 89 c7 48 8b 00 <ff> 50 48 39 e8 75 0d 48 83 c4 08 5b 5d c3 66 0f 1f 44 00 00 e8 3b
-</pre>
+<code>[ 1424.914725] kscreenlocker_g[2396]: segfault at 218 ip 00007fd938b46f9c sp 00007ffc4f1c0e70 error 4 in libQt5Feedback.so.5.0.0[7fd938b46000+4000] likely on CPU 0 (core 0, socket 0)</code>
+<code>[ 1424.914744] Code: 8d 15 58 fa ff ff 89 f5 53 48 89 fb 48 83 ec 08 48 8b 07 48 8b 40 60 48 39 d0 75 4a e8 5d 08 00 00 48 89 de 48 89 c7 48 8b 00 &lt;ff&gt; 50 48 39 e8 75 0d 48 83 c4 08 5b 5d c3 66 0f 1f 44 00 00 e8 3b</code>
