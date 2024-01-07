@@ -10,19 +10,12 @@ Here's the setup I'm using for both of them:
 - KDE + Plasma Mobile shell
 - SDDM (display manager) with virtual keyboard enabled
 
-First, install the base Debian 12 image.
+First, install Debian 12 &mdash; make sure to set up an account for yourself and choose KDE as your desktop.
 (Remember to install &amp; enable sshd if you need it!)
 
 Then, run this command:
 
 ` apt install plasma-mobile plasma-mobile-tweaks qtvirtualkeyboard-plugin
-
-Then, create a file at <code>/etc/sddm.conf</code> containing the following:
-
-` [General]
-` InputMethod=qtvirtualkeyboard
-
-Then, add a user account for yourself by running <code>adduser $YOURUSERNAME</code>.
 
 <h3>The kscreenlocker problem</h3>
 
