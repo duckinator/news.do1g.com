@@ -1,17 +1,17 @@
-WIP, don't follow these yet] Today I flashed a modern Android version onto Lenovo Tab M8 FHD (TB-8705F) (and I can't get it to work)
+[WIP, don't follow these yet] Today I flashed a modern Android version onto Lenovo Tab M8 FHD (TB-8705F) (and I can't get it to work)
 
 !!! WARNING: WIP. I haven't done this <em>successfully</em> yet. Right now these instructions are DEFINITELY WRONG SOMEWHERE.
 
-Follow these instructions at your own peril; I'm not reesponsible for any damage caused to your device, etc, etc.
+Follow these instructions at your own peril; I'm not responsible for any damage caused to your device, etc, etc.
 
-I recommend doing this from Debian, if you try it.
+I recommend doing this from Debian, if you try it. Note that <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=928551"><code>fastboot -w</code> doesn't work on Debian</a>, so you'll need do a factory reset using Recovery Mode.
 
 You start by following <em><a href="https://source.android.com/docs/setup/build/running#unlocking-recent-devices">Google's insructions for unlocking the bootloader on recent devices</a></em>.
 
 Then, because the device is compliant with <a href="https://android-developers.googleblog.com/2017/05/here-comes-treble-modular-base-for.html">Project Treble</a>, you can use a <em>Generic System Image</em> on the device.
 
 
-Before you get started, download the ARM64 (no Google software) or ARM64+GMS (with Google's proprietary software) from <https://developer.android.com/topic/generic-system-image/releases#14-stable>. Extract that ZIP file to a new folder on the Debian system, and run all the commands below from that folder.
+Before you get started, download the ARM64 (no Google software) or ARM64+GMS (with Google's proprietary software) from <https://developer.android.com/topic/generic-system-image/releases#13-stable>. Extract that ZIP file to a new folder on the Debian system, and run all the commands below from that folder.
 
 Now it's time to, hopefully, unlock the tablet's bootloader:
 
@@ -30,7 +30,10 @@ Now it's time to install it and prepare the device for use:
 ` fastboot flash system system.img
 2. Flash the vbmeta partition:
 ` fastboot flash vbmeta --disable-verity --disable-verification vbmeta.img
-3. Reboot the tablet:
-` fastboot reboot
+3. Reboot the tablet into recvory mode:
+` fastboot reboot recovery
+4. Select "Wipe data/factory reset", and then confirm.
+5. Select "Wipe cache partition", and then confirm.
+5. Reboot.
 
-And now it's stuck in a boot loop, sadly, so I GUESS I HAVE MORE FUCKING WORK TO DO HERE.
+And now it boots and shows an animated "android" loading icon forever.
