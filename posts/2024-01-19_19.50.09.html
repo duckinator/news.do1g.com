@@ -1,18 +1,23 @@
-[WIP, don't follow these yet] Today I flashed a modern Android version onto Lenovo Tab M8 FHD (TB-8705F) (and I can't get it to work)
+Today I flashed a modern Android version onto Lenovo Tab M8 FHD (TB-8705F) (and I can't get it to work)
 
-!!! WARNING: WIP. I haven't done this <em>successfully</em> yet. Right now these instructions are DEFINITELY WRONG SOMEWHERE.
+FOLLOW THESE INSTRUCTIONS AT YOUR OWN PERIL. I HAVE NO IDEA WHAT I AM DOING.
 
-Follow these instructions at your own peril; I'm not responsible for any damage caused to your device, etc, etc.
+DON'T DO THIS IF YOU'RE NOT OKAY WITH POTENTIALLY BRICKING YOUR DEVICE.
 
-I recommend doing this from Debian, if you try it. Note that <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=928551"><code>fastboot -w</code> doesn't work on Debian</a>, so you'll need do a factory reset using Recovery Mode.
+I AM NOT RESPONSIBLE FOR DAMAGE CAUSED TO YOUR DEVICE, YOUR DEVICE NOT WORKING, ETC.
+
+I recommend doing this from Debian, if you try it. Note that <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=928551"><code>fastboot -w</code> doesn't work on Debian</a>, so you'll need do a factory reset using Recovery Mode instead!
 
 You start by following <em><a href="https://source.android.com/docs/setup/build/running#unlocking-recent-devices">Google's insructions for unlocking the bootloader on recent devices</a></em>.
 
 Then, because the device is compliant with <a href="https://android-developers.googleblog.com/2017/05/here-comes-treble-modular-base-for.html">Project Treble</a>, you can use a <em>Generic System Image</em> on the device.
 
+Google provides official Generic System Images, but the Android 13 and Android 14 ones don't work on this tablet (and, it seems, many other devices).
 
-Before you get started, download the ARM64 (no Google software) or ARM64+GMS (with Google's proprietary software) from <https://developer.android.com/topic/generic-system-image/releases#13-stable>. Extract that ZIP file to a new folder on the Debian system, and run all the commands below from that folder.
+There's another project, called <a href="https://github.com/TrebleDroid/treble_experimentations">Treble Droid</a>, which provides builds that have patches to work better on various devices. Their Android 14 image doesn't work on this tablet currently, but their Android 13 image does.
 
+Download <https://github.com/TrebleDroid/treble_experimentations/releases/download/ci-20230905/system-td-arm64-ab-vanilla.img.xz> on the Debian system, and run all future commands from that directory.
+  
 Now it's time to, hopefully, unlock the tablet's bootloader:
 
 1. Turn off the tablet
@@ -22,18 +27,30 @@ Now it's time to, hopefully, unlock the tablet's bootloader:
 4. Plug the tablet into the Debian system via USB.
 5. Start the unlock process by running:
 ` fastboot flashing unlock
-6. Follow the instructions on the tablet to unlock the bootloader. It claims it'll void your warranty, but this device is so old that probably doesn't exist.
+6. Follow the instructions on the tablet to unlock the bootloader. It claims it'll void your warranty, but this device is old enough that your warranty probably doesn't exist.
 
 Now it's time to install it and prepare the device for use:
 
 1. Flash the image:
 ` fastboot flash system system.img
-2. Flash the vbmeta partition:
-` fastboot flash vbmeta --disable-verity --disable-verification vbmeta.img
 3. Reboot the tablet into recvory mode:
 ` fastboot reboot recovery
 4. Select "Wipe data/factory reset", and then confirm.
 5. Select "Wipe cache partition", and then confirm.
 5. Reboot.
 
-And now it boots and shows an animated "android" loading icon forever.
+<details>
+<summary>IF THAT DOESN'T WORK, TRY THIS</summary>
+
+You may need the vbmeta.img file from Google's. I had already tried flashing this before trying the TrebleDroid one which doesn't provide an equivalent, so <em>I don't know if it's needed or not</em>.
+  
+If you try this, download the ARM64 (no Google software) image from <https://developer.android.com/topic/generic-system-image/releases#13-stable>. Extract that ZIP file.
+
+Then, from the directory that was extracted to:
+
+1. Flash the vbmeta partition:
+` fastboot flash vbmeta --disable-verity --disable-verification vbmeta.img
+2. Reboot:
+` fastboot reboot
+
+</details>
