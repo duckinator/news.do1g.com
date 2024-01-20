@@ -1,0 +1,22 @@
+[WIP, don't follow these yet] Today I flashed a modern Android version onto Lenovo Tab M8 FHD (TB-8705F)
+
+Follow these instructions at your own peril; I'm not reesponsible for any damage caused to your device, etc, etc.
+
+I recommend doing this from Debian, if you try it.
+
+You start by following <em><a href="https://source.android.com/docs/setup/build/running#unlocking-recent-devices">Google's insructions for unlocking the bootloader on recent devices</a></em>.
+
+Then, because the device is compliant with <a href="https://android-developers.googleblog.com/2017/05/here-comes-treble-modular-base-for.html">Project Treble</a>, you can use a <em>Generic System Image</em> on the device.
+
+Before you get started, download the "system-td-arm64-ab-vanilla.img.xz" image from <https://github.com/TrebleDroid/treble_experimentations/releases>. You can theoretically use any version newer than what came on the device, but I'm trying Android 14.
+
+1. Turn off the tablet
+2. Enter FASTBOOT mode: Hold the power and volume down buttons until the device vibrates. It should say "FASTBOOT mode" on the screen.
+3. Install adb, fastboot, and all the things they depend on:
+` apt install adb fastboot
+4. Plug the tablet into the Debian system via USB.
+5. Start the unlock process by running:
+` fastboot flashing unlock
+6. Follow the instructions on the tablet to unlock the bootloader. It claims it'll void your warranty, but this device is so old that probably doesn't exist.
+7. Wipe the /data partition on the device:
+` fastboot flashall -w
