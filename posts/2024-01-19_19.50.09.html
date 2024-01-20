@@ -1,5 +1,7 @@
 [WIP, don't follow these yet] Today I flashed a modern Android version onto Lenovo Tab M8 FHD (TB-8705F)
 
+!!! WARNING: Once you flash a new image to the device, at boot it shows a message saying you have to press the power button or it'll reboot. If you don't do this, it'll keep rebooting forever.
+
 Follow these instructions at your own peril; I'm not reesponsible for any damage caused to your device, etc, etc.
 
 I recommend doing this from Debian, if you try it.
@@ -9,6 +11,9 @@ You start by following <em><a href="https://source.android.com/docs/setup/build/
 Then, because the device is compliant with <a href="https://android-developers.googleblog.com/2017/05/here-comes-treble-modular-base-for.html">Project Treble</a>, you can use a <em>Generic System Image</em> on the device.
 
 Before you get started, download the "system-td-arm64-ab-vanilla.img.xz" image from <https://github.com/TrebleDroid/treble_experimentations/releases>. You can theoretically use any version newer than what came on the device, but I'm trying Android 14.
+Decompress the downloaded file using <code>unxz system-td-arm64-ab-vanilla.img.xz</code>.
+
+Now it's time to, hopefully, unlock the tablet's bootloader:
 
 1. Turn off the tablet
 2. Enter FASTBOOT mode: Hold the power and volume down buttons until the device vibrates. It should say "FASTBOOT mode" on the screen.
@@ -18,5 +23,11 @@ Before you get started, download the "system-td-arm64-ab-vanilla.img.xz" image f
 5. Start the unlock process by running:
 ` fastboot flashing unlock
 6. Follow the instructions on the tablet to unlock the bootloader. It claims it'll void your warranty, but this device is so old that probably doesn't exist.
-7. Wipe the /data partition on the device:
-` fastboot flashall -w
+
+Now it's time to install it and prepare the device for use:
+
+1. Flash the image:
+` fastboot flash system system-td-arm64-ab-vanilla.img
+2. Reboot into recovery mode. (I had some trouble with this; it dropped me into FASTBOOT again for some reason, so I just ran <code>fastboot reboot recovery</code>.)
+3. Select "Wipe data/factory reset", then confirm it.
+4. Select "Reboot system now".
