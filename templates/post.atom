@@ -1,8 +1,8 @@
     <entry>
         <title>{{ text | lines | first }}</title>
-        <link href="https://notes.do1g.com/{{ filename }}" />
+        <link href="{{ root_url }}/{{ filename }}" />
         <id>{{ datetime | atom-tag }}</id>
-        <updated>{{ datetime | atom-datetime }}</updated>
+        <updated>{{ datetime | atom-updated | atom-datetime }}</updated>
         <content type="html"><![CDATA[
 <h2><strong>{{ text | lines | head }}</strong></h2>
 
