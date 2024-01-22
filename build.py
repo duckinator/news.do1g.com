@@ -3,10 +3,6 @@
 from datetime import datetime
 from pathlib import Path
 
-# The last time the Atom feed itself was updated.
-# Update this, for example, if post.atom or main.atom are changed.
-LAST_GLOBAL_UPDATE = "2024-01-21 18:28:00"
-
 ROOT_URL = "https://notes.do1g.com"
 SITE_NAME = "pupdates"
 
@@ -140,7 +136,6 @@ variables = {
     "atom-tag": lambda dt: parse_datetime(dt).strftime("tag:duckinator.net,%Y-%m-%d:%H%M"),
     "atom-datetime": lambda dt: parse_datetime(dt).strftime("%Y-%m-%dT%H:%M:%SZ"),
     "atomize-each":  lambda l: [Template(ATOM_POST).apply({**post, **variables}) for post in l],
-    "atom-updated": lambda dt: sorted([LAST_GLOBAL_UPDATE, dt])[1],
     "dict-get-dt": lambda d: d["datetime"],
     "first": lambda l: l[0],
     "last": lambda l: l[-1],

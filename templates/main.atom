@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>{{ site_name }}</title>
   <link href="{{ root_url }}/"/>
-  <updated>{{ posts | first | dict-get-dt | atom-updated | atom-datetime }}</updated>
+  <updated>{{ posts | first | dict-get-dt | atom-datetime }}</updated>
   <author>
     <name>Ellen Marie Dash</name>
   </author>
